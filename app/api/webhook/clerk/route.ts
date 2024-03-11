@@ -5,6 +5,8 @@ import { WebhookEvent } from '@clerk/nextjs/server'
 import { createUser, deleteUser, updateUser } from '@/lib/actions/user.actions'
 import { clerkClient } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
+import { connectToDatabase } from '@/lib/database'
+import User from '@/lib/database/models/user.model'
  
 export async function POST(req: Request) {
  
@@ -64,8 +66,12 @@ export async function POST(req: Request) {
       lastName: last_name,
       photo: image_url,
     }
+    // const newUser = await createUser(user);
+    await connectToDatabase();
     console.log(user)
-    const newUser = await createUser(user);
+
+    let newUser = await User.create(user);
+    newUser = JSON.parse(JSON.stringify(newUser));
 
     if(newUser) {
       await clerkClient.users.updateUserMetadata(id, {

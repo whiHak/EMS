@@ -5,16 +5,16 @@ export default authMiddleware({
   publicRoutes: [
     "/",
     "/events/:id",
-    "/api/webhook/clerk",
-    "/api/webhook/strip",
-    "/api/uploadthing",
+    // "/api/webhook/clerk",
+    // "/api/webhook/strip",
+    // "/api/uploadthing",
   ],
   // Routes that can always be accessed, and have
   // no authentication information
   ignoredRoutes: [
-    // "/api/webhook/clerk",
-    // "/api/webhook/strip",
-    // "/api/uploadthing",
+    "/api/webhook/clerk",
+    "/api/webhook/strip",
+    "/api/uploadthing",
   ],
 });
 

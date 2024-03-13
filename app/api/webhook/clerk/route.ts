@@ -16,9 +16,10 @@ export async function POST(req: Request) {
  
   // Get the headers
   const headerPayload = headers();
-  const svix_id = headerPayload.get("svix-id");
-  const svix_timestamp = headerPayload.get("svix-timestamp");
-  const svix_signature = headerPayload.get("svix-signature");
+  const svix_id = req.headers.get("svix-id");
+  const svix_timestamp = req.headers.get("svix-timestamp");
+  const svix_signature = req.headers.get("svix-signature");
+
  
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
@@ -52,6 +53,7 @@ export async function POST(req: Request) {
  
   // Get the ID and type
   const eventType = evt.type;
+  console.log(eventType)
  
   if(eventType === 'user.created') {
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
@@ -67,7 +69,7 @@ export async function POST(req: Request) {
     const newUser = await createUser(user);
 
     if(newUser) {
-      await clerkClient.users.updateUserMetadata(id, {
+      await clerkClient.users.updateUserMetadata( id, {
         publicMetadata: {
           userId: newUser._id
         }

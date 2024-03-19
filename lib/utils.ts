@@ -32,6 +32,8 @@ export const formatDateTime = (dateString: Date) => {
     hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
   }
 
+  // if(!dateString) return {dateTime: "N/A"}
+  
   const formattedDateTime: string = new Date(dateString).toLocaleString('en-US', dateTimeOptions)
 
   const formattedDate: string = new Date(dateString).toLocaleString('en-US', dateOptions)

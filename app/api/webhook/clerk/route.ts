@@ -16,9 +16,9 @@ export async function POST(req: Request) {
  
   // Get the headers
   const headerPayload = headers();
-  const svix_id = req.headers.get("svix-id");
-  const svix_timestamp = req.headers.get("svix-timestamp");
-  const svix_signature = req.headers.get("svix-signature");
+  const svix_id = headerPayload.get("svix-id");
+  const svix_timestamp = headerPayload.get("svix-timestamp");
+  const svix_signature = headerPayload.get("svix-signature");
 
  
   // If there are no headers, error out
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
       })
     }
 
-    return NextResponse.json({ message: 'Received', user: newUser })
+    return NextResponse.json({ message: 'OK', user: newUser })
   }
 
   if (eventType === 'user.updated') {
@@ -91,7 +91,7 @@ export async function POST(req: Request) {
 
     const updatedUser = await updateUser(id, user)
 
-    return NextResponse.json({ message: 'Received', user: updatedUser })
+    return NextResponse.json({ message: 'OK', user: updatedUser })
   }
 
   if (eventType === 'user.deleted') {
@@ -99,7 +99,7 @@ export async function POST(req: Request) {
 
     const deletedUser = await deleteUser(id!)
 
-    return NextResponse.json({ message: 'Received', user: deletedUser })
+    return NextResponse.json({ message: 'OK', user: deletedUser })
   }
  
   return new Response('', { status: 200 })

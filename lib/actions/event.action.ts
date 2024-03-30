@@ -63,7 +63,7 @@ export async function getEventById(eventId: string) {
 
     return JSON.parse(JSON.stringify(event));
   } catch (error) {
-    handleError(error);
+    // handleError(error);
   }
 }
 

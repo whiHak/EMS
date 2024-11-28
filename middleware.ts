@@ -11,11 +11,6 @@ export default authMiddleware({
   ],
   // Routes that can always be accessed, and have
   // no authentication information
-  ignoredRoutes: [
-    "/api/webhooks/clerk",
-    "/api/webhooks/strip",
-    "/api/uploadthing",
-  ],
 });
 
 export const config = {

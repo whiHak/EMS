@@ -11,6 +11,7 @@ export default authMiddleware({
   ],
   // Routes that can always be accessed, and have
   // no authentication information
+  ignoredRoutes: ["/api/uploadthing"],
 });
 
 export const config = {
